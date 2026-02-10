@@ -121,8 +121,8 @@ class KineticLangevinSampler(GroupSampler):
         Algorithm 1 of https://proceedings.mlr.press/v247/kong24a/kong24a.pdf
         """
         # initialize group elements and momenta
-        g = self.group.random_samples(bsize, self.init_scale).to(self.dtype)
-        m = torch.zeros(bsize, self.group.num_generators, device=g.device, dtype=self.dtype)
+        g = self.group.exp(torch.randn(bsize, self.group.num_generators, device=self.group.device, dtype=self.dtype))
+        m = torch.zeros(bsize, self.group.num_generators, device=self.group.device, dtype=self.dtype)
 
         # prepare trajectory storage
         g_traj = torch.empty(bsize, self.steps, *g.shape[1:], device=g.device, dtype=g.dtype)
@@ -201,7 +201,7 @@ class DiffusionSampler(GroupSampler):
             log_modular_w: [bsize,]
         """
         # steps in Lie algebra
-        dw_coeffs = self.group.random_coeff(bsize * t).to(self.dtype)
+        dw_coeffs = torch.randn(bsize * t, self.group.num_generators, device=self.group.device, dtype=self.dtype)
         dw_coeffs = self._deflatten(dw_coeffs, bsize, t)
         dw_coeffs *= self.gamma[None, :t].view(1, t, *([1] * (dw_coeffs.ndim - 2)))
         dw_coeffs *= self.diffusion_scale
@@ -283,7 +283,7 @@ class DiffusionSampler(GroupSampler):
             t = self.steps - i
 
             score = self.estimate_score(g.float(), t)
-            noise = self.group.random_coeff(bsize).to(self.dtype)
+            noise = torch.randn(bsize, self.group.num_generators, device=self.group.device, dtype=self.dtype)
 
             step = self.gamma[t - 1].pow(2) * self.drift_scale * score \
                 + self.gamma[t - 1] * self.diffusion_scale * noise
