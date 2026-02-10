@@ -1,6 +1,6 @@
 # Transformation-Inverting Energy Diffusion (PyTorch)
 
-[![arXiv](https://img.shields.io/badge/arXiv-xxx-b31b1b.svg)](https://arxiv.org/abs/xxx) \
+[![arXiv](https://img.shields.io/badge/arXiv-2602.08267-b31b1b.svg)](https://arxiv.org/abs/2602.08267) \
 **Inverting Data Transformations via Diffusion Sampling** \
 [Jinwoo Kim\*](https://jw9730.github.io), [Sékou-Oumar Kaba\*](https://oumarkaba.github.io/), [Jiyun Park](https://www.linkedin.com/in/jiyun-park/), [Seunghoon Hong†](https://maga33.github.io/), [Siamak Ravanbakhsh†](https://siamak.page/) (\* equal contribution, † equal advising) \
 arXiv 2026
