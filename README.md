@@ -18,10 +18,13 @@ docker pull pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
 docker run -it --gpus all --ipc host --name tied -v /home:/home pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel bash
 ```
 
-Assuming the codebase is located at `~/tied` inside Docker container, install the required packages:
+Assuming the codebase is located at `~/tied` inside Docker container, install the required packages and download the required data:
 
 ```bash
 cd ~/tied
+apt update && apt install -y git git-lfs
+git lfs install
+git lfs pull
 pip3 install -r requirements.txt
 ```
 
