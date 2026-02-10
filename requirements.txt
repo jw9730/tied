@@ -1,0 +1,9 @@
+easydict
+matplotlib
+lightning
+scipy
+kagglehub
+bayesian-optimization
+deepxde
+-f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+jax[cuda12_pip]==0.4.28
